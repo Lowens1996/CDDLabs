@@ -1,0 +1,16 @@
+CC=g++
+CFLAGS= -std=c++11 -pthread
+
+#This rule says that each .o file depends on a .cpp file of the same name
+%.o: %.cpp
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
+
+ALL: rendezvous.o
+	$(CC) -o rendezvous  rendezvous.o $(CFLAGS) $(DEBUGFLAGS)
+
+DEBUG: DEBUGFLAGS = -DDEBUG
+DEBUG: ALL
+
+
+CLEAN:
+	rm *.o
