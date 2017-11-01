@@ -50,10 +50,7 @@ int main(void){
     {
        std::thread Thread;
        Thread=std::thread(Task,mutex,barrier1,barrier2);
-    }
-  for(index=0; index<=numOfThreads; index++)
-    {
-      Thread.join();
+       Thread.join();
     }
  
   /*create thread vector  

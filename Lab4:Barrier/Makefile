@@ -2,13 +2,13 @@
 #Simple makefile 
 
 Executable: Barrier.o Semaphore.o #creates executable file called barrier using object files from below
-	g++ Barrier.o Semaphore.o -o barrier #compile object files together to create executable 
+	g++ -std=c++11 -pthread barrier.o Semaphore.o -o barrier
 
 Barrier.o: barrier.cpp #Main program file 
-	g++ -c barrier.cpp
+	g++ -std=c++11 -pthread -c barrier.cpp
 
-Semaphore.o: Semaphore.cpp Semaphore.h #other cpp files and header files in this case will always be
-	g++ -c Semaphore.cpp	       #Semaphore.cpp & .h 
+Semaphore.o: Semaphore.cpp Semaphore.h #other cpp files and header files in this case will always be Semaphore.cpp & .h
+	g++ -std=c++11 -pthread -c Semaphore.cpp	        
 
 DEBUG: DEBUGFLAGS = -DDEBUG
 DEBUG: ALL
