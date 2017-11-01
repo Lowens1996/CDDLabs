@@ -1,20 +1,17 @@
 #Author: Lee Owens
+#Simple makefile 
 
-CC=g++
-CFLAGS= -std=c++11 -pthread
-Header= Semaphore.h
-CPPFILES= Semaphore.cpp barrier.cpp
+Executable: Barrier.o Semaphore.o #creates executable file called barrier using object files from below
+	g++ Barrier.o Semaphore.o -o barrier #compile object files together to create executable 
 
-#This rule says that each .o file depends on a .cpp file of the same name
-%.o: %.cpp
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
+Barrier.o: barrier.cpp #Main program file 
+	g++ -c barrier.cpp
 
-ALL: $(Header) $(CPPFILES)
-	$(CC) -o barrier  $(CFLAGS) $(DEBUGFLAGS) $(Header) $(CPPFILES)
+Semaphore.o: Semaphore.cpp Semaphore.h #other cpp files and header files in this case will always be
+	g++ -c Semaphore.cpp	       #Semaphore.cpp & .h 
 
 DEBUG: DEBUGFLAGS = -DDEBUG
 DEBUG: ALL
 
-
 CLEAN:
-	rm *.o
+	rm *.o #remove all object files 
