@@ -1,16 +1,17 @@
-CC=g++
-CFLAGS= -std=c++11 -pthread
+#Author: Lee Owens
+#Simple makefile 
 
-#This rule says that each .o file depends on a .cpp file of the same name
-%.o: %.cpp
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
+Executable: Rendezvous.o Semaphore.o #creates executable file called barrier using object files from below
+	g++ -std=c++11 -pthread rendezvous.o Semaphore.o -o rendezvous
 
-ALL: rendezvous.o
-	$(CC) -o rendezvous  rendezvous.o $(CFLAGS) $(DEBUGFLAGS)
+Rendezvous.o: rendezvous.cpp #Main program file 
+	g++ -std=c++11 -pthread -c rendezvous.cpp
+
+Semaphore.o: Semaphore.cpp Semaphore.h #other cpp files and header files in this case will always be Semaphore.cpp & .h
+	g++ -std=c++11 -pthread -c Semaphore.cpp	        
 
 DEBUG: DEBUGFLAGS = -DDEBUG
 DEBUG: ALL
 
-
 CLEAN:
-	rm *.o
+	rm *.o #remove all object files 
