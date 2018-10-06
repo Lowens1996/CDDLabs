@@ -1,3 +1,3 @@
 # CDDLabs
 
-Practicing concurrent developement methodologies in C++
+Practicing concurrent development methodologies in C++
